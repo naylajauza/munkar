@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontControllers;
+use App\Http\Middleware\IsAdmin;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 });
 
 // ROUTE FRONTEND
-Route::get('index', [FrontControllers::class, 'index']);
+Route::get('/', [FrontControllers::class, 'index']);
 Route::get('contact', [FrontControllers::class, 'contact']);
 Route::get('shop', [FrontControllers::class, 'shop']);
 Route::get('cart', [FrontControllers::class, 'cart']);
@@ -42,5 +44,14 @@ Route::get('checkout', [FrontControllers::class, 'checkout']);
 Route::get('produktract', [FrontControllers::class, 'produktract']);
 Route::get('about', [FrontControllers::class, 'about']);
 Route::get('shopdetails', [FrontControllers::class, 'shopdetails']);
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], function () {
+    Route::get('/', function () {
+        return view('admin.index');
+    });
+    // untuk Route Backend Lainnya
+    Route::resource('user', App\Http\Controllers\UsersController::class);
+
+});
 
 

@@ -22,12 +22,13 @@
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <!--main css-->
     <link href="{{asset('assets/css/bootstrap-extended.css')}}" rel="stylesheet">
-    <link href="../sass/main.css')}}" rel="stylesheet">
-    <link href="../sass/dark-theme.css')}}" rel="stylesheet">
-    <link href="../sass/blue-theme.css')}}" rel="stylesheet">
-    <link href="../sass/semi-dark.css')}}" rel="stylesheet">
-    <link href="../sass/bordered-theme.css')}}" rel="stylesheet">
-    <link href="../sass/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('sass/main.css')}}" rel="stylesheet">
+    <link href="{{asset('sass/dark-theme.css')}}" rel="stylesheet">
+    <link href="{{asset('sass/blue-theme.css')}}" rel="stylesheet">
+    <link href="{{asset('sass/semi-dark.css')}}" rel="stylesheet">
+    <link href="{{asset('sass/bordered-theme.css')}}" rel="stylesheet">
+    <link href="{{asset('sass/responsive.css')}}" rel="stylesheet">
+    @yield('styles')
 
 </head>
 
@@ -161,7 +162,8 @@
     <script>
         new PerfectScrollbar(".user-list")
     </script>
-
+    @stack('scripts')
+    @include('sweetalert::alert')
 </body>
 
 </html>

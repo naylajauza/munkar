@@ -1,17 +1,5 @@
 <!-- header-area-start -->
       <header>
-        <div class="header-top space-bg">
-           <div class="container">
-              <div class="row">
-                 <div class="col-12">
-                    <div class="header-welcome-text text-start ">
-                       <span>Welcome to our international shop! Enjoy free shipping on orders $100 & up.</span>
-                       <a href="shop.html">Shop Now <i class="fal fa-long-arrow-right"></i> </a>
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </div>
         <div class="logo-area mt-30 d-none d-xl-block">
            <div class="container">
               <div class="row align-items-center">
@@ -31,7 +19,7 @@
                           </form>
                        </div>
                        <div class="header-meta header-language d-flex align-items-center">
-                          <div class="header-meta__lang">
+                          {{-- <div class="header-meta__lang">
                              <ul>
                                 <li>
                                    <a href="#">
@@ -58,14 +46,45 @@
                                 <option>YEAN</option>
                                 <option>EURO</option>
                              </select>
-                          </div>
+                          </div> --}}
                           <div class="header-meta__social d-flex align-items-center ml-25">
                              <button class="header-cart p-relative tp-cart-toggle">
                                 <i class="fal fa-shopping-cart"></i>
                                 <span class="tp-product-count">2</span>
                              </button>
-                             <a href="sign-in.html"><i class="fal fa-user"></i></a>
+                             @guest
+                             <a href="{{ url('login') }}"><i class="fal fa-user"></i></a>
                              <a href="wishlist.html"><i class="fal fa-heart"></i></a>
+                             @else
+                             <a href="#"><i class="fal fa-user"></i></a>
+                             <a href="wishlist.html"><i class="fal fa-heart"></i></a>
+                             <div class="header-meta header-language d-flex align-items-center">
+                                 <div class="header-meta__lang">
+                                     <ul>
+                                         <li>
+                                             <a href="{{url('')}}">
+                                                 <span><i class="fal fa-arow"></i></span>
+                                                 {{ Auth::user()->name }}
+                                             </a>
+                                             <ul class="header-meta__lang-submenu">
+                                                 <li>
+                                                     <a href="{{url('')}}">Profile</a>
+                                                 </li>
+                                                 <li>
+                                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                     {{ __('Logout') }}
+                                                     </a>
+                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                         @csrf
+                                                     </form>
+                                                 </li>
+                                             </ul>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </div>
+                             @endguest
                           </div>
                        </div>
                     </div>
